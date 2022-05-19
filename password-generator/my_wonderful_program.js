@@ -10,8 +10,8 @@ function entierAleatoire(min, max) {
     return Math.floor(Math.random() * (max - min +1)) + min;
 }
 
-function generatePassword(length) {
-    let maxI = length.toString();
+function generatePassword(length=8) {
+    let maxI = length;
     let result = '';
     let numbers = '0123456789';
     let symboles = '!,@ù%$?=+-'
@@ -26,14 +26,18 @@ function generatePassword(length) {
             aleatoire2 = entierAleatoire(0,maxI-1);
         }
     }
-
     for (var i = 0; i < length; i++) {
-        if(i== aleatoire1){
-            result += numbers.charAt(Math.floor(Math.random() *
-            numbersLength));
-        }else if(i== aleatoire2){
-            result += symboles.charAt(Math.floor(Math.random() *
-            symbolesLength)); 
+        if(argv.sn){
+            if(i== aleatoire1){
+                result += numbers.charAt(Math.floor(Math.random() *
+                numbersLength));
+            }else if(i== aleatoire2){
+                result += symboles.charAt(Math.floor(Math.random() *
+                symbolesLength)); 
+            }else{
+                result += characters.charAt(Math.floor(Math.random() *
+                charactersLength));
+            }
         }else{
             result += characters.charAt(Math.floor(Math.random() *
             charactersLength));
@@ -63,4 +67,5 @@ function logColor(pass){
         }
          
     };
+    process.stdout.write("\n")
 }
